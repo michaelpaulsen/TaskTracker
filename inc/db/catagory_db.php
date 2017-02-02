@@ -41,28 +41,24 @@ class Category {
 		}
 	}
 
-	static function Insert() {
-echo "1";
+	static function Insert($title,$person_id = NULL) {
 		$conn = Database::getInstance();
-echo "2";
 		$stmt = $conn->prepare("INSERT INTO category (title,person_id) VALUES (?,?);");
 		if ($stmt !== false) {
-echo "3";
 			$stmt->bind_param("si",$title,$person_id);
 			$stmt->execute();
 			$result = $stmt->get_result();
 			$stmt->close();
-		}	
-		//if ($result && $result->num_rows >= "1") {
-		//	echo "4";
+		}
+		if ($result && $result->num_rows >= "1") {
 			$row = $result->fetch_assoc();
 			return self::bindRow($row);	
-		//}
+		}
 	}
 
-	static function update($id,$title,$person_id) {
+	static function update($id,$title,$person_id=NULL) {
 		$conn = Database::getInstance();
-		$stmt = $conn->prepare("UPDATE `task_tracker`.`category` SET `title` = ?, WHERE `category`.`id` = ?;") ;
+		$stmt = $conn->prepare("UPDATE `task_tracker`.`category` SET `title`=?,`person_id`=? WHERE `category`.`id`=?;") ;
 		if ($stmt !== false) {
 			$stmt->bind_param("sii",$title,$person_id,$id);
 			$status = $stmt->execute();

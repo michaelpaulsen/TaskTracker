@@ -5,24 +5,23 @@
 <?php
 	$x = (new Category());
 	if( isset($_POST["action"]) && strpos($_POST["action"], 'Category') !== false ) /*working*/ {
-
+		if(isset($_POST['id'])){
+			$id =$_POST['id'];
+		}
+	$personId =$_POST['person_id'];
 		$title =$_POST['title'];
-	if(isset($_POST['addPersonId']) && !empty($_POST['addPersonId'])){/*working*/
-			$personId =$_POST['addPersonId'];
-	}else{
+		if(empty($personId)){
 			$personId = NULL;
-	}		
+		}
 		switch( $_POST["action"] ) {
 			case 'newCategory':
 				Category::Insert($title,$personId);
 				break;
 			case 'editCategory':		
-				
-
-
-				break;
-			case 'deleteCategory':
-
+				Category::update($id,$title,$personId);
+				if(isset($_POST['delete'])){
+				 	Category::delete($id);
+				}
 			break;
 		}
 	}
@@ -76,7 +75,7 @@ if(isset($categories)){
 			<form id="<?php echo $formId; ?>" method="post" class="editCategory">
 				<input form="<?php echo $formId; ?>" type="hidden" name="action" value="editCategory" class="formAction" />
 				<button form="<?php echo $formId; ?>"  class ="updateCategory" type="submit" value="Update"></button>
-				<button form="<?php echo $formId; ?>" class="deleteCategory" type="submit" name="delete" value="Delete"></button>
+				<button form="<?php echo $formId; ?>" class="deleteCategory" type="submit" name="delete" value="delete"></button>
 			</form>
 		</td>
 	</tr>
