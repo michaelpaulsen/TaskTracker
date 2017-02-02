@@ -1,0 +1,110 @@
+form {
+margin: 0;
+}
+.inputAfterText{
+	display: inline-block;
+	margin-left:1vw;
+}
+.longInBtnWrapper {
+	display: inline-block;
+	width: 30vw;
+  	margin: 1vw;
+  	text-align: center;
+  	vertical-align: bottom;
+  
+	
+}
+.longInBtnWrapper button{
+	/*text-shadow: 0px 0px 5px #fff;*/
+	text-shadow: 0 0 5px #fff;
+	border: 1px solid blue;
+	border-radius: 10px;
+	display: block;
+	padding: 4em 0;
+	/*background: #ffcccc;*/
+	width: 100%;
+}
+.longInBtnWrapper button:hover {
+  box-shadow: 0px 0px 10px rgba(50,50,0,1);
+}
+.longInBtnWrapper button:active {
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+}
+.longInBtnWrapper.password{
+	display: inline-block;
+}
+.longInBtnWrapper.password input{
+	margin-left: 1vw;
+	display: block;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.longInBtnWrapper.password button {
+	text-shadow: 0px 0px 5px #fff;
+	padding: 2.7em 0;
+	margin-top: 1em
+}
+.dInlineBlock{
+	display: inline-block;
+}
+
+td{
+	text-align: center;
+}
+.addPerson{
+	background-image: url("/css/img/add_button.png");
+	width: 25px;
+	height: 25px;
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	border-style:none;
+}
+.updatePerson{
+background-image: url("/css/img/edit_button.png");
+	width: 25px;
+	height: 25px;
+	background-size: 25px;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	border-style:none;
+}
+.deletePerson{
+background-image: url("/css/img/revove_button.png");
+	width: 25px;
+	height: 25px;
+	background-size: 23px;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	border-style:none;
+}
+
+.addCategory{
+	background-image: url("/css/img/add_button.png");
+	width: 25px;
+	height: 25px;
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	border-style:none;
+}
+.updateCategory{
+background-image: url("/css/img/edit_button.png");
+	width: 25px;
+	height: 25px;
+	background-size: 25px;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	border-style:none;
+}
+.deleteCategory{
+background-image: url("/css/img/revove_button.png");
+	width: 25px;
+	height: 25px;
+	background-size: 23px;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	border-style:none;
+}
