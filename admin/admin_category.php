@@ -3,26 +3,40 @@
 	include_once ($_SERVER['DOCUMENT_ROOT'] . "/inc/comhead.php");
 ?>
 <?php
-	$x = (new Category());
-	if( isset($_POST["action"]) && strpos($_POST["action"], 'Category') !== false ) /*working*/ {
-		if(isset($_POST['id'])){
-			$id =$_POST['id'];
+	if( isset($_POST["action"]) && strpos($_POST["action"], 'Category') !== false ){
+		if(isset($_POST['person_id'])){
+			$personId =$_POST['person_id'];
+		}else{
+			if(isset($_POST["addPersonId"])) {
+				$personId = $_POST["addPersonId"];
+				//var_dump($_POST['person_id']);	
+			}
+			
 		}
-	$personId =$_POST['person_id'];
+		if (isset($_POST['id'])){
+			$id =$_POST['id'];	
+		}
 		$title =$_POST['title'];
+		
 		if(empty($personId)){
 			$personId = NULL;
 		}
+		
 		switch( $_POST["action"] ) {
+			
 			case 'newCategory':
 				Category::Insert($title,$personId);
 				break;
+				
 			case 'editCategory':		
-				Category::update($id,$title,$personId);
 				if(isset($_POST['delete'])){
 				 	Category::delete($id);
+				} else{
+					Category::update($id,$title,$personId);
 				}
+				
 			break;
+				
 		}
 	}
 
@@ -30,6 +44,7 @@
 
 <table cellpadding="2" cellspacing="0" border="1"><tr>
 <?php
+$people = Person::getAll();
 $newCategory = new Category();
 foreach($newCategory as $key=>$value) {
     print "<th>$key</th>";
@@ -40,11 +55,19 @@ foreach($newCategory as $key=>$value) {
 	<tr>
 		<td></td>
 		<td><input form="addCategory" id="addTitle" type="text" name="title" size="10" /></td>
-		<td><input form="addCategory" id="addPersonId"type="text" name="addPersonId" size="10" /></td>
+		<td>
+			<select form="addCategory" id="addPersonId" name="addPersonId" >
+<?php 
+	foreach($people as $person) {
+    		print "<option value=\"".$person->id."\">".$person->username."</option>";
+	} 
+?>
+			</select>
+		</td>
 		<td>
 			<form id="addCategory" method="post">
 				<input form="addCategory" type="hidden" name="action" value="newCategory" />
-				<button class="addCategory"form="addCategory" type="submit" value="Add"></button>
+				<button class="addCategory" form="addCategory" type="submit" value="Add"></button>
 			</form>
 		</td>
 	</tr>

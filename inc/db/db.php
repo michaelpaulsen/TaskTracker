@@ -26,6 +26,5 @@ class Database extends MySQLi {
 }
 include $_SERVER['DOCUMENT_ROOT'] . "/inc/db/person_db.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/inc/db/task_db.php";
-//include $_SERVER['DOCUMENT_ROOT'] . "/inc/db/activity_db.php";
-//include $_SERVER['DOCUMENT_ROOT'] . "/inc/db/catagory_db.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/inc/db/catagory_db.php";
 ?>

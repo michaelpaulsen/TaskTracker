@@ -13,13 +13,16 @@
 		$role     = $_POST['role'];
 		$color    = $_POST['color'];
 		$color = str_replace( '#', '', $color );
-				
+		if ( $role !== 'admin' )  { 
+			$role = 'user'; 
+		}
+		
 		switch( $_POST["action"] ) {
 			case 'newPerson':
 				
 				if ( empty( $password ) || !isset($password) ) { $password = NULL; }
 				if ( empty( $email) || !isset($email) ) { $email    = NULL; }
-				if ( $role !== 'admin' )  { $role      = 'user'; }
+				
 				
 				//$_SESSION['msg'] = "added person";	
 				Person::Insert($username,$password,$email,$name,$role,$color);
@@ -27,12 +30,11 @@
 				break;
 			case 'editPerson':
 				//$_SESSION['msg'] ="updated person";
-				Person::update($id,$username,$password,$email,$name,$role,$color);
-				break;
-			case 'deletePerson':
-				echo"here";
-				//$_SESSION['msg'] ="deleted person";
-				Person::delete($id);
+				if(isset($_POST["delete"])){
+					Person::delete($id);
+				}else{
+					Person::update($id,$username,$password,$email,$name,$role,$color);
+				}
 				break;
 		}
 	}
