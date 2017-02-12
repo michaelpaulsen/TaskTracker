@@ -50,10 +50,10 @@ margin: 0;
 	display: inline-block;
 }
 
-td{
+th{
 	text-align: center;
 }
-.addPerson{
+.addButton{
 	background-image: url("/css/img/add_button.png");
 	width: 25px;
 	height: 25px;
@@ -62,8 +62,8 @@ td{
 	background-color: #ffffff;
 	border-style:none;
 }
-.updatePerson{
-background-image: url("/css/img/edit_button.png");
+.updateButton{
+	background-image: url("/css/img/edit_button.png");
 	width: 25px;
 	height: 25px;
 	background-size: 25px;
@@ -71,36 +71,8 @@ background-image: url("/css/img/edit_button.png");
 	background-color: #ffffff;
 	border-style:none;
 }
-.deletePerson{
-background-image: url("/css/img/revove_button.png");
-	width: 25px;
-	height: 25px;
-	background-size: 23px;
-	background-repeat: no-repeat;
-	background-color: #ffffff;
-	border-style:none;
-}
-
-.addCategory{
-	background-image: url("/css/img/add_button.png");
-	width: 25px;
-	height: 25px;
-	background-size: 24px;
-	background-repeat: no-repeat;
-	background-color: #ffffff;
-	border-style:none;
-}
-.updateCategory{
-background-image: url("/css/img/edit_button.png");
-	width: 25px;
-	height: 25px;
-	background-size: 25px;
-	background-repeat: no-repeat;
-	background-color: #ffffff;
-	border-style:none;
-}
-.deleteCategory{
-background-image: url("/css/img/revove_button.png");
+.deleteButton{
+	background-image: url("/css/img/revove_button.png");
 	width: 25px;
 	height: 25px;
 	background-size: 23px;

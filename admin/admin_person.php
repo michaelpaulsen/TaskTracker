@@ -18,7 +18,7 @@
 		}
 		
 		switch( $_POST["action"] ) {
-			case 'newPerson':
+		case 'newPerson':
 				
 				if ( empty( $password ) || !isset($password) ) { $password = NULL; }
 				if ( empty( $email) || !isset($email) ) { $email    = NULL; }
@@ -61,7 +61,7 @@ foreach($newPerson as $key=>$value) {
 		<td>
 			<form id="addPerson" method="post">
 				<input form="addPerson" type="hidden" name="action" value="newPerson" />
-				<button class="addPerson"form="addPerson" type="submit" value="Add"></button>
+				<button class="addButton"form="addPerson" type="submit" value="Add"></button>
 			</form>
 		</td>
 	</tr>
@@ -97,8 +97,8 @@ foreach(Person::getAll() as $aPerson){
 		<td>
 			<form id="<?php echo $formId; ?>" method="post" class="editPerson">
 				<input form="<?php echo $formId; ?>" type="hidden" name="action" value="editPerson" class="formAction" />
-				<button form="<?php echo $formId; ?>"  class ="updatePerson" type="submit" value="Update"></button>
-				<button form="<?php echo $formId; ?>" class="deletePerson" type="submit" name="delete" value="Delete"></button>
+				<button form="<?php echo $formId; ?>"  class ="updateButton" type="submit" value="Update"></button>
+				<button form="<?php echo $formId; ?>" class="deleteButton" type="submit" name="delete" value="Delete"></button>
 			</form>
 		</td>
 	</tr>
