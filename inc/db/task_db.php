@@ -1,11 +1,15 @@
 <?php
 class Task {
+	const PEROID_DAYLY = "daily"
+	const PEROID_SEMIWEEKLY = "semiweekly"
+	const PEROID_WEEKLY = "weekly"
+	const PEROID_SEMIMONTHLY = "semimonthly"
+	const PEROID_MONTHLY = "monthly"
 	public $id;
 	public $category_id;
 	public $title;
 	public $peroid;
 	public $points;
-		
 	private function bindRow($row) {
 		/*
 			id
@@ -15,7 +19,7 @@ class Task {
 		$Task->id = $row["id"];
 		$Task->categoryId = $row["category_id"];
 		$Task->title = $row["title"];
-		//$Task->peroid = $row["peroid"];
+		$Task->peroid = $row["peroid"];
 		$Task->points = $row["points"];
 		return $Task;
 	}
@@ -30,7 +34,7 @@ class Task {
 			}
 			return $people;
 		} else {
-			return null;
+			return [];
 		}
 	}
 
@@ -48,10 +52,10 @@ class Task {
 			return null;
 		}
 	}
-	static function Insert($username,$password,$email,$name,$role,$color = "ffffff") {
+	static function Insert($title,$category_id,$peroid,$points) {
 		$conn = Database::getInstance();
-		if ($stmt = $conn->prepare("INSERT INTO Task(username,password,email,name,role,color) VALUES (?,?,?,?,?,?);")) {
-			$stmt->bind_param("ssssss", $username,$password,$email,$name,$role,$color);
+		if ($stmt = $conn->prepare("INSERT INTO Task(title,categor_id,peroid,points) VALUES (?,?,?,?);")) {
+			$stmt->bind_param("ssss", $title,$category_id,$peroid,$points,$role,$color);
 			$stmt->execute();
 			$result = $stmt->get_result();
 			$stmt->close();
@@ -62,11 +66,11 @@ class Task {
 		}
 	}
 
-static function update( $id,$username,$password,$email,$name,$role,$color) {
+static function update( $id,$title,$category_id,$peroid,$points) {
 		$conn = Database::getInstance();
-		$stmt = $conn->prepare("UPDATE `task_tracker`.`Task` SET `username` = ?, `password`= ?, `email` = ?,`name`= ?,`role` = ?, `color` = ? WHERE `Task`.`id` = ?;") ;
+		$stmt = $conn->prepare("UPDATE `task_tracker`.`Task` SET `category_id` =?, `title` =?, `peroid` =? `pints` =? WHERE `Task`.`id` = ?;") ;
 		if ($stmt !== false) {
-			$stmt->bind_param("ssssssi",$username,$password,$email,$name,$role,$color,$id);
+			$stmt->bind_param("ssssi",$title,$category_id,$peroid,$points,$id);
 			$status = $stmt->execute();
 			$stmt->close();
 			
