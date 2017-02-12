@@ -1,10 +1,10 @@
 <?php
 class Task {
-	const PEROID_DAYLY = "daily"
-	const PEROID_SEMIWEEKLY = "semiweekly"
-	const PEROID_WEEKLY = "weekly"
-	const PEROID_SEMIMONTHLY = "semimonthly"
-	const PEROID_MONTHLY = "monthly"
+	const PEROID_DAYLY = "daily";
+	const PEROID_SEMIWEEKLY = "semiweekly";
+	const PEROID_WEEKLY = "weekly";
+	const PEROID_SEMIMONTHLY = "semimonthly";
+	const PEROID_MONTHLY = "monthly";
 	public $id;
 	public $category_id;
 	public $title;
