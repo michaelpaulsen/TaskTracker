@@ -3,36 +3,27 @@
 	include_once ($_SERVER['DOCUMENT_ROOT'] . "/inc/comhead.php");
 ?>
 <?php
+	$periods = Task::getPeroids();
 	if( isset($_POST["action"]) && strpos($_POST["action"], 'Task') !== false ){
-		if(isset($_POST['category_id'])){
-			$categoryId =$_POST['category_id'];
-		}else{
-			if(isset($_POST["addCategoryId"])) {
-				$categoryId = $_POST["addCategoryId"];
-				//var_dump($_POST['category_id']);	
-			}
-			
-		}
 		if (isset($_POST['id'])){
 			$id =$_POST['id'];	
 		}
-		$title =$_POST['title'];
-		
-		if(empty($categoryId)){
-			$categoryId = NULL;
-		}
+		$categoryId =$_POST['category_id'];
+		$title = $_POST['title'];
+		$peroid = $_POST['period'];
+		$points = $_POST['points'];
 		
 		switch( $_POST["action"] ) {
 			
 			case 'newTask':
-				Task::Insert($title,$categoryId);
+				Task::Insert($categoryId, $title, $period, $points);
 				break;
 				
 			case 'editTask':		
 				if(isset($_POST['delete'])){
 				 	Task::delete($id);
 				} else{
-					Task::update($id,$title,$categoryId);
+					Task::update($id,$title,$categoryId,$peroid,$points);
 				}
 				
 			break;
@@ -55,9 +46,9 @@ foreach($newTask as $key=>$value) {
 	<tr>
 		<td></td>
 		<td>
-			<select form="addTask" id="addCategoryId" name="addCategoryId" >
-				<option value="">none</option>
-<?php 			
+			<select form="addTask" id="addCategoryId" name="category_id" required="required">
+				<option value="">- select -</option>
+<?php
 	foreach($categories as $category) {
     		print "<option value=\"".$category->id."\">".$category->title."</option>";
 	} 
@@ -65,6 +56,16 @@ foreach($newTask as $key=>$value) {
 			</select>
 		</td>
 		<td><input form="addTask" id="addTitle" type="text" name="title" size="10" /></td>
+		<td>
+			<select form="addTask" id="addPeriod" name="period" >
+<?php 			
+	foreach($periods as $period) {
+    		print "<option value=\"".$period."\">".$period."</option>";
+	} 
+?>
+			</select>
+		</td>
+		<td><input form="addTask" id="addPoints" type="number" name="points" size="10" /></td>
 		<td>
 			<form action="?tab=task" id="addTask" method="post">
 				<input form="addTask" type="hidden" name="action" value="newTask" />
@@ -101,6 +102,20 @@ if(isset($tasks)){
 					
 				}else{
 					print "<option value=\"".$category->id."\">".$category->title ."</option>";
+				}
+			}
+?>
+</select>
+<select form="<?php echo $formId ?>" name="category_id" >
+				<option value="">none</option>
+<?php 			
+			foreach($roles as $role) {
+				if($value == $role->id){
+					//$slected = "slected";
+					print "<option value=\"".$role->id."\" selected>".$role->title."</option>";
+					
+				}else{
+					print "<option value=\"".$role->id."\">".$role->title ."</option>";
 				}
 			}
 ?>

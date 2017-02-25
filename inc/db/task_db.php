@@ -1,6 +1,6 @@
 <?php
 class Task {
-	const PEROID_DAYLY = "daily";
+	const PEROID_DAILY = "daily";
 	const PEROID_SEMIWEEKLY = "semiweekly";
 	const PEROID_WEEKLY = "weekly";
 	const PEROID_SEMIMONTHLY = "semimonthly";
@@ -8,7 +8,7 @@ class Task {
 	public $id;
 	public $category_id;
 	public $title;
-	public $peroid;
+	public $period;
 	public $points;
 	private function bindRow($row) {
 		/*
@@ -19,7 +19,7 @@ class Task {
 		$Task->id = $row["id"];
 		$Task->categoryId = $row["category_id"];
 		$Task->title = $row["title"];
-		$Task->peroid = $row["peroid"];
+		$Task->period = $row["period"];
 		$Task->points = $row["points"];
 		return $Task;
 	}
@@ -49,22 +49,32 @@ class Task {
 				$row = $result->fetch_assoc();
 				return self::bindRow($row);
 			}
-			return null;
+			return null;	
 		}
 	}
-	static function Insert($title,$category_id,$peroid,$points) {
+	static function getPeroids() {
+		return array(self::PEROID_DAILY, self::PEROID_SEMIWEEKLY, self::PEROID_WEEKLY, self::PEROID_SEMIMONTHLY, self::PEROID_MONTHLY);
+	}
+	
+	
+	static function Insert( $category_id, $title, $period, $points ) {
 		$conn = Database::getInstance();
-		if ($stmt = $conn->prepare("INSERT INTO Task(title,categor_id,peroid,points) VALUES (?,?,?,?);")) {
-			$stmt->bind_param("ssss", $title,$category_id,$peroid,$points,$role,$color);
+
+		if ($stmt = $conn->prepare("INSERT INTO Task(category_id, title, period, points) VALUES (?,?,?,?);") ) 	{
+
+			$stmt->bind_param("ssss", $category_id, $title, $period, $points);
 			$stmt->execute();
 			$result = $stmt->get_result();
 			$stmt->close();
-			if ($result->num_rows >= "1") {
+			if ($result && $result->num_rows >= "1") {
+var_dump(1);
 				$row = $result->fetch_assoc();
 				return self::bindRow($row);
 			}
+		}else{
 		}
 	}
+	
 
 static function update( $id,$title,$category_id,$peroid,$points) {
 		$conn = Database::getInstance();
