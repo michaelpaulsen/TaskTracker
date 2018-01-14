@@ -45,7 +45,7 @@
 <?php
 $newPerson = new Person();
 foreach($newPerson as $key=>$value) {
-    print "<th>$key</th>";
+    print "<th class = \"$key\">$key</th>";
 }
 ?>
 		<th>action</th>
@@ -90,7 +90,7 @@ foreach(Person::getAll() as $aPerson){
 		if ($key === 'id') {
 			echo $value;
 		}
-		echo '<input form="' . $formId . '" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" />';
+		echo '<input form="' . $formId . '" class = "'. $key .'" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" />';
 		echo '</td>';
 	}
 ?>

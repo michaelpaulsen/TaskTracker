@@ -20,12 +20,15 @@
 		<br/>
 		<div class="tab-content">
 			<div id="home" role="tabpanel" class="active tab-pane">
+				<p>admin_person.php</p>
 <?php include  $_SERVER['DOCUMENT_ROOT'] . "/admin/admin_person.php"?>
 			</div>
 			<div id="catagory" role="tabpanel" class="tab-pane">
+				<p>admin_category.php"</p>
 <?php include  $_SERVER['DOCUMENT_ROOT'] . "/admin/admin_category.php"?>
 			</div>
 			<div id="task" role="tabpanel" class="tab-pane">
+				<p>admin_task.php"</p>
 <?php include  $_SERVER['DOCUMENT_ROOT'] . "/admin/admin_task.php"?>
 			</div>
 			<div id="activity" role="tabpanel" class="tab-pane">

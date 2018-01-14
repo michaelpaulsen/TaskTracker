@@ -38,7 +38,8 @@
 $categories = Category::getAll();
 $newTask = new Task();
 foreach($newTask as $key=>$value) {
-    print "<th>$key</th>";
+	//echo $key." ";
+    print "<th class = \"".$key."\"> $key </th>";
 }
 ?>
 		<th>action</th>
@@ -81,53 +82,44 @@ if(isset($tasks)){
 	<tr>
 <?php
 		foreach($aTask as $key=>$value) {
-			$formId = "editTask" . $aTask->id;
-			echo '<td>';
-			
-			switch($key){
-				case "id":
-					$type = 'hidden';
-					echo $value;
-					echo '<input form="' .$formId . '" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" />';
-					break;
-				case "category_id": 
+			if($key != "categoryId"){
+				$formId = "editTask" . $aTask->id;
+				echo '<td>';
+				
+				switch($key){
+					case "id":
+						$type = 'hidden';
+						echo $value;
+						/*					echo '<input form="' .$formId . '" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" class = "'.$key.'" />';';*/
+						echo '<input form="' .$formId . '" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" class = "'.$key.'" />';
+						break;
+					case "category_id": 
 ?>
-			<select form="<?php echo $formId ?>" name="category_id" >
+			<select form="<?php echo $formId ?>" name="category_id" class = "category_id" >
 				<option value="">none</option>
 <?php 			
-			foreach($categories as $category) {
-				if($value == $category->id){
-					//$slected = "slected";
-					print "<option value=\"".$category->id."\" selected>".$category->title."</option>";
+				foreach($categories as $category) {
+					if($value == $category->id){
+						$slected = "slected";
+						print "<option value=\"".$category->id."\" selected>".$category->title."</option>";
 					
-				}else{
-					print "<option value=\"".$category->id."\">".$category->title ."</option>";
+					}else{
+						print "<option value=\"".$category->id."\">".$category->title ."</option>";
+					}
 				}
-			}
-?>
-</select>
-<select form="<?php echo $formId ?>" name="category_id" >
-				<option value="">none</option>
-<?php 			
-			foreach($roles as $role) {
-				if($value == $role->id){
-					//$slected = "slected";
-					print "<option value=\"".$role->id."\" selected>".$role->title."</option>";
-					
-				}else{
-					print "<option value=\"".$role->id."\">".$role->title ."</option>";
-				}
-			}
 ?>
 </select>
 <?php
-					break;
-				default:
-					$type = 'text';
-					echo '<input form="' .$formId . '" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" />';
-			}
-			echo '</td>';
-			}
+						
+						break;
+					default:
+						$type = 'text';
+						echo '<input form="' .$formId . '" type="' . $type . '" name="' . $key . '" value="' . $value . '" size="10" class ="'.$key.'"/>';
+				}
+				echo '</td>';
+				}			
+				}
+	
 
  ?>
 		<td>
@@ -142,5 +134,6 @@ if(isset($tasks)){
 <?php
 	}
 }
+
 ?>
 </table>
